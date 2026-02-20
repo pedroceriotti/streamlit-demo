@@ -1,17 +1,15 @@
 import streamlit as st
-import pandas as pd
 
 import nekt
-
 nekt.data_access_token = st.secrets["DATA_ACCESS_TOKEN"]
 
+st.title("Connect your app with Nekt 👩🏼‍💻")
+
 try:
-    cidades_df = nekt.load_table(layer_name="Raw", table_name="cidades").toPandas()
-    st.write(cidades_df)  
-    st.write("Dataframe loaded successfully!")
+    cidades_df = nekt.load_table(layer_name="Raw", table_name="cidades").select("id", "nome")
+    print("Dataframe loaded successfully!")
 except Exception as e:
-    st.error(f"Error loading data: {e}")
+    print(f"Error loading data: {e}")
 
-########
-
-st.title("🎈 My new app")
+st.write(f"Total de cidades: {cidades_df.count()}")
+st.write(cidades_df.toPandas().head(10))
