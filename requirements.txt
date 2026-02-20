@@ -1,1 +1,2 @@
 streamlit
+git+https://github.com/nektcom/nekt-sdk-py.git#egg=nekt-sdk
